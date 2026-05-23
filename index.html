@@ -104,8 +104,8 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
         <div class="card-title">Thông tin công nhân</div>
         <div class="field">
           <label>Khung giờ / Chuyền *</label>
-          <select id="inp-chuyen" onchange="onChuyenChange()">
-            <option value="">— Chọn chuyền —</option>
+          <select id="inp-time" onchange="onChuyenChange()">
+            <option value="">— Chọn khung giờ —</option>
             <option>7:30 - 8:30</option>
             <option>8:30 - 9:30</option>
             <option>9:30 - 10:30</option>
@@ -232,7 +232,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 <div class="toast" id="toast"></div>
 
 <script>
-const SHEET_URL='https://script.google.com/macros/s/AKfycbzfnYJLt_KXfnTyKes7QWKKHbfM55E5uPr0lKKSfFyX6BmlLoR9lmFjiADO1iJnZm7ngw/exec';
+const SHEET_URL='https://script.google.com/macros/s/AKfycbxc9f7ZieAEdJSjFPVNxNQ2QJLwQ8ZzFdMbFvMJ--Gq3pZ5QUGyt-9aC2KBOKl5zcj_LA/exec';
 const NV_PASSWORD='Locnguyenupdate';
 let danhSach=[],maHangData={},maHangList=[],records=[],toastTimer,nvUnlocked=false,selectedCD=null;
 
@@ -381,8 +381,9 @@ async function saveRecord(){
   setStatus('Đang lưu...');
   try{
     await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'nangsuit',ten,chuyen,mahang,socongdoan,tencongdoan,nangsuit,ngay})});
+      body:JSON.stringify({action:'nangsuit',time,ten,chuyen,mahang,socongdoan,tencongdoan,nangsuit,ngay})});
     showToast('Đã lưu thành công!');setStatus('Đã đồng bộ ✓');
+    document.getElementById('inp-time').value='';
     document.getElementById('inp-ten').value='';
     document.getElementById('inp-mahang').value='';
     document.getElementById('inp-nangsuit').value='';
@@ -397,7 +398,12 @@ async function loadBaoCao(){
   setStatus('Đang tải...');
   try{
     const rows=await fetchData(SHEET_URL+'?t='+Date.now());
-    records=rows.length<=1?[]:rows.slice(1).map(r=>({ten:r[0]||'',chuyen:r[1]||'',nangsuit:parseInt(r[5])||0}));
+    records=rows.length<=1?[]:rows.slice(1).map(r=>({
+  time:r[0]||'',
+  ten:r[1]||'',
+  chuyen:r[2]||'',
+  nangsuit:parseInt(r[6])||0
+}));
     renderReport();setStatus('Đã đồng bộ ✓');
   }catch(e){setStatus('Lỗi tải')}
 }
