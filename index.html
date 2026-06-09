@@ -62,15 +62,6 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 .bar-fill{height:100%;background:var(--green-mid);border-radius:4px;transition:width .5s}
 .btn-reload{width:100%;padding:11px;background:var(--green-pale);border:1.5px solid var(--green-pale2);border-radius:var(--radius-sm);font-size:13px;font-weight:500;font-family:inherit;cursor:pointer;color:var(--green-dark);display:flex;align-items:center;justify-content:center;gap:6px;margin-bottom:1rem}
 .btn-reload svg{width:16px;height:16px}
-.nv-item{display:flex;align-items:center;padding:11px 0;border-bottom:1px solid var(--border)}
-.nv-item:last-child{border-bottom:none}
-.nv-avatar{width:34px;height:34px;border-radius:50%;background:var(--green-pale2);display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;color:var(--green-dark);flex-shrink:0;margin-right:10px}
-.nv-info{flex:1}
-.nv-name{font-size:14px;font-weight:500;color:var(--text-dark)}
-.nv-del{background:none;border:none;color:var(--text-light);cursor:pointer;padding:6px;border-radius:6px}
-.nv-del:active{background:#fee2e2;color:var(--red)}
-.nv-del svg{width:16px;height:16px}
-.chuyen-header{font-size:12px;font-weight:600;color:var(--text-mid);text-transform:uppercase;letter-spacing:.05em;padding:10px 0 6px;border-bottom:1px solid var(--border);margin-bottom:2px}
 .spinner{width:20px;height:20px;border:2.5px solid var(--green-pale2);border-top-color:var(--green-mid);border-radius:50%;animation:spin .7s linear infinite;margin:0 auto}
 @keyframes spin{to{transform:rotate(360deg)}}
 .loading-box{text-align:center;padding:2rem;color:var(--text-light);font-size:13px}
@@ -84,6 +75,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
     <div class="topbar-icon"><svg viewBox="0 0 24 24"><path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/></svg></div>
     <div><div class="topbar-title">Năng Suất</div><div class="topbar-sub" id="sync-status">Đang tải...</div></div>
   </div>
+
   <div class="tabs">
     <button class="tab-btn active" onclick="switchTab('nhap')" id="tab-nhap-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>Nhập liệu
@@ -91,16 +83,15 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
     <button class="tab-btn" onclick="switchTab('bao-cao')" id="tab-bao-cao-btn">
       <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>Báo cáo
     </button>
-    <button class="tab-btn" onclick="switchTab('nhan-vien')" id="tab-nhan-vien-btn">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>Nhân viên
-    </button>
   </div>
+
   <div class="content">
 
-    <!-- NHẬP LIỆU -->
+    <!-- ══ NHẬP LIỆU ══ -->
     <div id="sec-nhap">
       <div class="card">
         <div class="card-title">Thông tin công nhân</div>
+
         <div class="field">
           <label>Khung giờ *</label>
           <select id="inp-thoigian">
@@ -116,26 +107,33 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
             <option>16:30 – 17:30</option>
           </select>
         </div>
+
         <div class="field">
           <label>Bộ phận / Chuyền *</label>
           <select id="inp-chuyen" onchange="onChuyenChange()">
             <option value="">— Chọn chuyền —</option>
-            <option>Chuyền 1</option><option>Chuyền 2</option>
-            <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
+            <option>Chuyền 1</option>
+            <option>Chuyền 2</option>
+            <option>Chuyền 3</option>
+            <option>Chuyền 4</option>
+            <option>Chuyền 5</option>
           </select>
         </div>
+
         <div class="field">
           <label>Họ và tên *</label>
           <input type="text" id="inp-ten" placeholder="Chọn chuyền trước..." disabled autocomplete="off"
             oninput="onTenInput()" onblur="hideSuggest('suggest-ten')" onfocus="onTenInput()" />
           <div class="suggest-list" id="suggest-ten" style="display:none"></div>
         </div>
+
         <div class="field">
           <label>Mã hàng *</label>
           <input type="text" id="inp-mahang" placeholder="Gõ mã hàng..." autocomplete="off"
             oninput="onMaHangInput()" onblur="hideSuggest('suggest-mahang')" onfocus="onMaHangInput()" />
           <div class="suggest-list" id="suggest-mahang" style="display:none"></div>
         </div>
+
         <div class="field">
           <label>Số công đoạn</label>
           <input type="text" id="inp-congdoan" placeholder="Chọn mã hàng trước..." disabled autocomplete="off"
@@ -143,26 +141,29 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
           <div class="suggest-list" id="suggest-congdoan" style="display:none"></div>
           <div class="cd-display" id="cd-display"></div>
         </div>
+
         <div class="field">
-          <label>Năng suất (sp/ngày)</label>
+          <label>Năng suất (sp/giờ)</label>
           <input type="number" id="inp-nangsuit" placeholder="0" min="0" inputmode="numeric" />
         </div>
+
         <div class="field">
           <label>Ngày làm</label>
           <input type="date" id="inp-ngay" />
         </div>
       </div>
+
       <button class="btn-save" id="btn-save" onclick="saveRecord()">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
         Lưu vào Google Sheets
       </button>
-      <button class="btn-secondary" onclick="window.open('https://docs.google.com/spreadsheets/d/1cvAC-N0btIDIOUXAWk9E7Y9dlzeGEmIoN7C09aJphbU/edit','_blank')">
+      <button class="btn-secondary" onclick="window.open('https://docs.google.com/spreadsheets/d/1AK5k05vHkbMWJE-_5XxmwsoIdSmfGfKAoBwmH601IRs/edit','_blank')">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
-        Mở Google Sheet / Tải về Excel
+        Mở Google Sheet
       </button>
     </div>
 
-    <!-- BÁO CÁO -->
+    <!-- ══ BÁO CÁO ══ -->
     <div id="sec-bao-cao" style="display:none">
       <div class="stats-grid">
         <div class="stat-box accent"><div class="slabel">Tổng bản ghi</div><div class="sval" id="s-total">—</div></div>
@@ -180,307 +181,260 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
       </button>
     </div>
 
-    <!-- NHÂN VIÊN -->
-    <div id="sec-nhan-vien" style="display:none">
-      <div id="nv-lock" style="text-align:center;padding:3rem 1rem">
-        <div style="font-size:44px;margin-bottom:12px">🔒</div>
-        <div style="font-size:15px;font-weight:600;color:var(--text-dark);margin-bottom:6px">Khu vực quản lý</div>
-        <div style="font-size:13px;color:var(--text-light);margin-bottom:1.5rem">Chỉ dành cho quản lý</div>
-        <div style="position:relative;max-width:280px;margin:0 auto 10px">
-          <input type="password" id="nv-pw" placeholder="Nhập mật khẩu..."
-            style="width:100%;padding:12px 44px 12px 14px;border:1.5px solid var(--border);border-radius:var(--radius-sm);font-size:15px;font-family:inherit;outline:none;background:var(--bg)"
-            onkeydown="if(event.key==='Enter') checkNvPassword()" />
-          <span onclick="togglePwVis()" id="pw-eye"
-            style="position:absolute;right:12px;top:50%;transform:translateY(-50%);cursor:pointer;font-size:18px;color:var(--text-light);user-select:none">👁</span>
-        </div>
-        <div id="nv-pw-err" style="font-size:12px;color:var(--red);margin-bottom:10px;display:none">Sai mật khẩu, thử lại!</div>
-        <button onclick="checkNvPassword()" class="btn-save" style="max-width:280px;margin:0 auto">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/></svg>
-          Mở khóa
-        </button>
-      </div>
-      <div id="nv-content" style="display:none">
-        <div class="card">
-          <div class="card-title">Thêm nhân viên</div>
-          <div class="field">
-            <label>Bộ phận / Chuyền *</label>
-            <select id="add-chuyen">
-              <option value="">— Chọn chuyền —</option>
-              <option>Chuyền 1</option><option>Chuyền 2</option>
-              <option>Chuyền 3</option><option>Chuyền 4</option><option>Chuyền 5</option>
-            </select>
-          </div>
-          <div class="field">
-            <label>Họ và tên *</label>
-            <input type="text" id="add-ten" placeholder="Nguyễn Văn A" />
-          </div>
-          <button class="btn-save" onclick="addNhanVien()">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 5v14M5 12h14"/></svg>
-            Import lên Google Sheets
-          </button>
-        </div>
-        <button class="btn-reload" onclick="loadDanhSach()">
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 11-2.12-9.36L23 10"/></svg>
-          Tải lại danh sách
-        </button>
-        <div id="nv-container"><div class="loading-box"><div class="spinner"></div>Đang tải...</div></div>
-      </div>
-    </div>
   </div>
 </div>
 <div class="toast" id="toast"></div>
 
 <script>
-const SHEET_URL='https://script.google.com/macros/library/d/1MzOGBlyoHKXPafIltyfX96YR7vF3_H9D-41Ky4nlg7ILxVLg67FkP7-d/1'; // ← Dán URL Apps Script mới vào đây sau khi deploy
-const NV_PASSWORD='Locnguyenupdate';
-let danhSach=[],maHangData={},maHangList=[],records=[],toastTimer,nvUnlocked=false,selectedCD=null;
+const SHEET_URL = 'https://script.google.com/macros/s/ĐÁN_URL_APPS_SCRIPT_VÀO_ĐÂY/exec';
 
-function showToast(msg,type){const t=document.getElementById('toast');t.textContent=msg;t.className='toast'+(type==='error'?' error':'')+' show';clearTimeout(toastTimer);toastTimer=setTimeout(()=>t.classList.remove('show'),3000)}
-function setStatus(msg){document.getElementById('sync-status').textContent=msg}
-function normalize(s){return(s||'').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g,'')}
-function getInitials(name){const p=(name||'').trim().split(' ');return p.length===1?(p[0][0]||'?').toUpperCase():(p[0][0]+p[p.length-1][0]).toUpperCase()}
-function hideSuggest(id){setTimeout(()=>{const el=document.getElementById(id);if(el)el.style.display='none'},180)}
+let danhSach = [], maHangData = {}, maHangList = [], records = [], toastTimer, selectedCD = null;
 
-async function fetchData(url){
-  // Thử fetch thường trước
-  try{const r=await fetch(url);if(r.ok)return await r.json()}catch(e){}
-  // Fallback JSONP cho CORS
-  return new Promise((resolve,reject)=>{
-    const cb='cb_'+Date.now()+'_'+Math.random().toString(36).slice(2);
-    window[cb]=function(data){resolve(data);delete window[cb];const s=document.getElementById(cb);if(s)s.remove()};
-    const s=document.createElement('script');s.id=cb;
-    s.src=url+(url.includes('?')?'&':'?')+'callback='+cb+'&t='+Date.now();
-    s.onerror=()=>{reject(new Error('failed'));delete window[cb];s.remove()};
+// ── Helpers ──
+function showToast(msg, type) {
+  const t = document.getElementById('toast');
+  t.textContent = msg;
+  t.className = 'toast' + (type === 'error' ? ' error' : '') + ' show';
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => t.classList.remove('show'), 3000);
+}
+function setStatus(msg) { document.getElementById('sync-status').textContent = msg; }
+function normalize(s) { return (s || '').toLowerCase().normalize('NFD').replace(/[\u0300-\u036f]/g, ''); }
+function hideSuggest(id) { setTimeout(() => { const el = document.getElementById(id); if (el) el.style.display = 'none'; }, 180); }
+
+// ── Fetch với fallback JSONP ──
+async function fetchData(url) {
+  try {
+    const r = await fetch(url);
+    if (r.ok) return await r.json();
+  } catch (e) {}
+  return new Promise((resolve, reject) => {
+    const cb = 'cb_' + Date.now() + '_' + Math.random().toString(36).slice(2);
+    window[cb] = function (data) { resolve(data); delete window[cb]; const s = document.getElementById(cb); if (s) s.remove(); };
+    const s = document.createElement('script');
+    s.id = cb;
+    s.src = url + (url.includes('?') ? '&' : '?') + 'callback=' + cb + '&t=' + Date.now();
+    s.onerror = () => { reject(new Error('failed')); delete window[cb]; s.remove(); };
     document.head.appendChild(s);
   });
 }
 
-async function loadDanhSach(){
-  try{
-    const rows=await fetchData(SHEET_URL+'?type=danhsach&t='+Date.now());
-    danhSach=rows.length<=1?[]:rows.slice(1).map(r=>({chuyen:(r[0]||'').trim(),ten:(r[1]||'').trim()})).filter(nv=>nv.ten);
-    const c=document.getElementById('nv-container');
-    if(c)renderDanhSach();
+// ── Tải danh sách nhân viên (dùng cho autocomplete tên) ──
+async function loadDanhSach() {
+  try {
+    const rows = await fetchData(SHEET_URL + '?type=danhsach&t=' + Date.now());
+    // Cột 0 = Chuyền, Cột 1 = Họ và tên
+    danhSach = rows.length <= 1 ? [] : rows.slice(1)
+      .map(r => ({ chuyen: (r[0] || '').trim(), ten: (r[1] || '').trim() }))
+      .filter(nv => nv.ten);
     setStatus('Sẵn sàng ✓');
-  }catch(e){setStatus('Lỗi tải danh sách')}
+  } catch (e) { setStatus('Lỗi tải danh sách'); }
 }
 
-async function loadMaHang(){
-  try{
-    const rows=await fetchData(SHEET_URL+'?type=mahang&t='+Date.now());
-    maHangData={};maHangList=[];
-    if(rows.length>1){
-      rows.slice(1).forEach(r=>{
-        const ma=(r[0]||'').trim(),so=parseInt(r[1])||0,ten=(r[2]||'').trim();
-        if(!ma||!ten)return;
-        if(!maHangData[ma]){maHangData[ma]=[];maHangList.push(ma)}
-        maHangData[ma].push({so,ten});
+// ── Tải danh sách mã hàng ──
+async function loadMaHang() {
+  try {
+    const rows = await fetchData(SHEET_URL + '?type=mahang&t=' + Date.now());
+    maHangData = {}; maHangList = [];
+    if (rows.length > 1) {
+      rows.slice(1).forEach(r => {
+        const ma = (r[0] || '').trim(), so = parseInt(r[1]) || 0, ten = (r[2] || '').trim();
+        if (!ma || !ten) return;
+        if (!maHangData[ma]) { maHangData[ma] = []; maHangList.push(ma); }
+        maHangData[ma].push({ so, ten });
       });
     }
-  }catch(e){console.log('Lỗi mã hàng:',e)}
+  } catch (e) { console.log('Lỗi mã hàng:', e); }
 }
 
-function onChuyenChange(){
-  const chuyen=document.getElementById('inp-chuyen').value;
-  const inp=document.getElementById('inp-ten');
-  inp.disabled=!chuyen;inp.placeholder=chuyen?'Gõ tên để tìm...':'Chọn chuyền trước...';inp.value='';
-  document.getElementById('suggest-ten').style.display='none';
-  if(chuyen)inp.focus();
+// ── Chuyền đổi → mở khóa input tên ──
+function onChuyenChange() {
+  const chuyen = document.getElementById('inp-chuyen').value;
+  const inp = document.getElementById('inp-ten');
+  inp.disabled = !chuyen;
+  inp.placeholder = chuyen ? 'Gõ tên để tìm...' : 'Chọn chuyền trước...';
+  inp.value = '';
+  document.getElementById('suggest-ten').style.display = 'none';
+  if (chuyen) inp.focus();
 }
 
-function onTenInput(){
-  const val=document.getElementById('inp-ten').value.trim();
-  const chuyen=document.getElementById('inp-chuyen').value;
-  const list=document.getElementById('suggest-ten');
-  if(!val||!chuyen){list.style.display='none';return}
-  const normVal=normalize(val);
-  const filtered=danhSach.filter(nv=>nv.chuyen===chuyen&&normalize(nv.ten).includes(normVal)).slice(0,8);
-  if(!filtered.length){list.style.display='none';return}
-  list.innerHTML=filtered.map(nv=>{
-    const idx=normalize(nv.ten).indexOf(normVal);
-    let hl=nv.ten;
-    if(idx>=0)hl=nv.ten.substring(0,idx)+'<span class="suggest-hl">'+nv.ten.substring(idx,idx+val.length)+'</span>'+nv.ten.substring(idx+val.length);
-    return`<div class="suggest-item" onmousedown="selectTen('${nv.ten.replace(/'/g,"\\'")}')">${hl}</div>`;
+// ── Autocomplete tên ──
+function onTenInput() {
+  const val = document.getElementById('inp-ten').value.trim();
+  const chuyen = document.getElementById('inp-chuyen').value;
+  const list = document.getElementById('suggest-ten');
+  if (!val || !chuyen) { list.style.display = 'none'; return; }
+  const normVal = normalize(val);
+  const filtered = danhSach.filter(nv => nv.chuyen === chuyen && normalize(nv.ten).includes(normVal)).slice(0, 8);
+  if (!filtered.length) { list.style.display = 'none'; return; }
+  list.innerHTML = filtered.map(nv => {
+    const idx = normalize(nv.ten).indexOf(normVal);
+    let hl = nv.ten;
+    if (idx >= 0) hl = nv.ten.substring(0, idx) + '<span class="suggest-hl">' + nv.ten.substring(idx, idx + val.length) + '</span>' + nv.ten.substring(idx + val.length);
+    return `<div class="suggest-item" onmousedown="selectTen('${nv.ten.replace(/'/g, "\\'")}')">${hl}</div>`;
   }).join('');
-  list.style.display='block';
+  list.style.display = 'block';
 }
-function selectTen(ten){document.getElementById('inp-ten').value=ten;document.getElementById('suggest-ten').style.display='none'}
+function selectTen(ten) {
+  document.getElementById('inp-ten').value = ten;
+  document.getElementById('suggest-ten').style.display = 'none';
+}
 
-function onMaHangInput(){
-  const val=document.getElementById('inp-mahang').value.trim();
-  const list=document.getElementById('suggest-mahang');
+// ── Autocomplete mã hàng ──
+function onMaHangInput() {
+  const val = document.getElementById('inp-mahang').value.trim();
+  const list = document.getElementById('suggest-mahang');
   resetCongDoan();
-  if(!val){list.style.display='none';return}
-  const normVal=normalize(val);
-  const filtered=maHangList.filter(ma=>normalize(ma).includes(normVal)).slice(0,8);
-  if(!filtered.length){list.style.display='none';return}
-  list.innerHTML=filtered.map(ma=>{
-    const idx=normalize(ma).indexOf(normVal);
-    let hl=ma;
-    if(idx>=0)hl=ma.substring(0,idx)+'<span class="suggest-hl">'+ma.substring(idx,idx+val.length)+'</span>'+ma.substring(idx+val.length);
-    const cnt=maHangData[ma]?maHangData[ma].length:0;
-    return`<div class="suggest-item" onmousedown="selectMaHang('${ma}')"><div>${hl}</div><div class="suggest-sub">${cnt} công đoạn</div></div>`;
+  if (!val) { list.style.display = 'none'; return; }
+  const normVal = normalize(val);
+  const filtered = maHangList.filter(ma => normalize(ma).includes(normVal)).slice(0, 8);
+  if (!filtered.length) { list.style.display = 'none'; return; }
+  list.innerHTML = filtered.map(ma => {
+    const idx = normalize(ma).indexOf(normVal);
+    let hl = ma;
+    if (idx >= 0) hl = ma.substring(0, idx) + '<span class="suggest-hl">' + ma.substring(idx, idx + val.length) + '</span>' + ma.substring(idx + val.length);
+    const cnt = maHangData[ma] ? maHangData[ma].length : 0;
+    return `<div class="suggest-item" onmousedown="selectMaHang('${ma}')"><div>${hl}</div><div class="suggest-sub">${cnt} công đoạn</div></div>`;
   }).join('');
-  list.style.display='block';
+  list.style.display = 'block';
 }
-function selectMaHang(ma){
-  document.getElementById('inp-mahang').value=ma;
-  document.getElementById('suggest-mahang').style.display='none';
+function selectMaHang(ma) {
+  document.getElementById('inp-mahang').value = ma;
+  document.getElementById('suggest-mahang').style.display = 'none';
   resetCongDoan();
-  const cdInp=document.getElementById('inp-congdoan');
-  if(maHangData[ma]&&maHangData[ma].length>0){
-    cdInp.disabled=false;cdInp.placeholder='Gõ số hoặc tên công đoạn...';cdInp.value='';cdInp.focus();
+  const cdInp = document.getElementById('inp-congdoan');
+  if (maHangData[ma] && maHangData[ma].length > 0) {
+    cdInp.disabled = false;
+    cdInp.placeholder = 'Gõ số hoặc tên công đoạn...';
+    cdInp.value = '';
+    cdInp.focus();
   }
 }
 
-function resetCongDoan(){
-  selectedCD=null;
-  const cdInp=document.getElementById('inp-congdoan');
-  cdInp.value='';cdInp.disabled=true;cdInp.placeholder='Chọn mã hàng trước...';
-  document.getElementById('cd-display').style.display='none';
-  document.getElementById('suggest-congdoan').style.display='none';
+// ── Autocomplete công đoạn ──
+function resetCongDoan() {
+  selectedCD = null;
+  const cdInp = document.getElementById('inp-congdoan');
+  cdInp.value = ''; cdInp.disabled = true; cdInp.placeholder = 'Chọn mã hàng trước...';
+  document.getElementById('cd-display').style.display = 'none';
+  document.getElementById('suggest-congdoan').style.display = 'none';
+}
+function onCongDoanInput() {
+  const val = document.getElementById('inp-congdoan').value.trim();
+  const ma = document.getElementById('inp-mahang').value.trim();
+  const list = document.getElementById('suggest-congdoan');
+  const cdList = maHangData[ma] || [];
+  if (!val || !cdList.length) { list.style.display = 'none'; return; }
+  const normVal = normalize(val);
+  const filtered = cdList.filter(cd => String(cd.so).startsWith(val) || normalize(cd.ten).includes(normVal)).slice(0, 10);
+  if (!filtered.length) { list.style.display = 'none'; return; }
+  list.innerHTML = filtered.map(cd =>
+    `<div class="suggest-item" onmousedown="selectCongDoan(${cd.so},'${cd.ten.replace(/'/g, "\\'")}')"><span class="suggest-hl">CĐ ${cd.so}</span> · ${cd.ten}</div>`
+  ).join('');
+  list.style.display = 'block';
+}
+function selectCongDoan(so, ten) {
+  selectedCD = { so, ten };
+  document.getElementById('inp-congdoan').value = so;
+  document.getElementById('suggest-congdoan').style.display = 'none';
+  const d = document.getElementById('cd-display');
+  d.textContent = '📌 CĐ' + so + ': ' + ten;
+  d.style.display = 'block';
 }
 
-function onCongDoanInput(){
-  const val=document.getElementById('inp-congdoan').value.trim();
-  const ma=document.getElementById('inp-mahang').value.trim();
-  const list=document.getElementById('suggest-congdoan');
-  const cdList=maHangData[ma]||[];
-  if(!val||!cdList.length){list.style.display='none';return}
-  const normVal=normalize(val);
-  const filtered=cdList.filter(cd=>String(cd.so).startsWith(val)||normalize(cd.ten).includes(normVal)).slice(0,10);
-  if(!filtered.length){list.style.display='none';return}
-  list.innerHTML=filtered.map(cd=>`<div class="suggest-item" onmousedown="selectCongDoan(${cd.so},'${cd.ten.replace(/'/g,"\\'")}')"><span class="suggest-hl">CĐ ${cd.so}</span> · ${cd.ten}</div>`).join('');
-  list.style.display='block';
-}
-function selectCongDoan(so,ten){
-  selectedCD={so,ten};
-  document.getElementById('inp-congdoan').value=so;
-  document.getElementById('suggest-congdoan').style.display='none';
-  const d=document.getElementById('cd-display');
-  d.textContent='📌 CĐ'+so+': '+ten;d.style.display='block';
-}
+// ── Lưu bản ghi ──
+async function saveRecord() {
+  const thoigian   = document.getElementById('inp-thoigian').value;
+  const chuyen     = document.getElementById('inp-chuyen').value;
+  const ten        = document.getElementById('inp-ten').value.trim();
+  const mahang     = document.getElementById('inp-mahang').value.trim();
+  const nangsuit   = parseInt(document.getElementById('inp-nangsuit').value) || 0;
+  const ngay       = document.getElementById('inp-ngay').value || new Date().toISOString().split('T')[0];
+  const socongdoan = selectedCD ? selectedCD.so : (parseInt(document.getElementById('inp-congdoan').value) || 0);
+  const tencongdoan= selectedCD ? selectedCD.ten : '';
 
-async function saveRecord(){
-  const ten=document.getElementById('inp-ten').value.trim();
-  const chuyen=document.getElementById('inp-chuyen').value;
-  const thoigian=document.getElementById('inp-thoigian').value;
-  const mahang=document.getElementById('inp-mahang').value.trim();
-  const nangsuit=parseInt(document.getElementById('inp-nangsuit').value)||0;
-  const ngay=document.getElementById('inp-ngay').value||new Date().toISOString().split('T')[0];
-  const socongdoan=selectedCD?selectedCD.so:(parseInt(document.getElementById('inp-congdoan').value)||0);
-  const tencongdoan=selectedCD?selectedCD.ten:'';
+  if (!thoigian) { showToast('Vui lòng chọn khung giờ!', 'error'); return; }
+  if (!chuyen)   { showToast('Vui lòng chọn chuyền!', 'error'); return; }
+  if (!ten)      { showToast('Vui lòng nhập họ và tên!', 'error'); return; }
+  if (!mahang)   { showToast('Vui lòng nhập mã hàng!', 'error'); return; }
 
-  if(!thoigian){showToast('Vui lòng chọn khung giờ!','error');return}
-  if(!chuyen){showToast('Vui lòng chọn chuyền!','error');return}
-  if(!ten){showToast('Vui lòng nhập họ và tên!','error');return}
-  if(!mahang){showToast('Vui lòng nhập mã hàng!','error');return}
-
-  const btn=document.getElementById('btn-save');
-  btn.disabled=true;
-  btn.innerHTML='<div style="width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0"></div> Đang lưu...';
+  const btn = document.getElementById('btn-save');
+  btn.disabled = true;
+  btn.innerHTML = '<div style="width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:white;border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0"></div> Đang lưu...';
   setStatus('Đang lưu...');
-  try{
-    await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({action:'nangsuit',ten,chuyen,thoigian,mahang,socongdoan,tencongdoan,nangsuit,ngay})});
-    showToast('Đã lưu thành công!');setStatus('Đã đồng bộ ✓');
-    document.getElementById('inp-ten').value='';
-    document.getElementById('inp-mahang').value='';
-    document.getElementById('inp-nangsuit').value='';
-    document.getElementById('inp-ngay').value=new Date().toISOString().split('T')[0];
+
+  try {
+    await fetch(SHEET_URL, {
+      method: 'POST', mode: 'no-cors',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'nangsuit', thoigian, ten, chuyen, mahang, socongdoan, tencongdoan, nangsuit, ngay })
+    });
+    showToast('Đã lưu thành công!');
+    setStatus('Đã đồng bộ ✓');
+    document.getElementById('inp-ten').value = '';
+    document.getElementById('inp-mahang').value = '';
+    document.getElementById('inp-nangsuit').value = '';
+    document.getElementById('inp-ngay').value = new Date().toISOString().split('T')[0];
     resetCongDoan();
-  }catch(e){showToast('Lỗi kết nối!','error');setStatus('Lỗi')}
-  btn.disabled=false;
-  btn.innerHTML='<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Lưu vào Google Sheets';
-}
-
-async function loadBaoCao(){
-  setStatus('Đang tải...');
-  try{
-    const rows=await fetchData(SHEET_URL+'?t='+Date.now());
-    records=rows.length<=1?[]:rows.slice(1).map(r=>({ten:r[0]||'',chuyen:r[1]||'',nangsuit:parseInt(r[5])||0}));
-    renderReport();setStatus('Đã đồng bộ ✓');
-  }catch(e){setStatus('Lỗi tải')}
-}
-
-function renderReport(){
-  const total=records.length;
-  const avg=total?Math.round(records.reduce((s,r)=>s+r.nangsuit,0)/total):0;
-  const max=total?Math.max(...records.map(r=>r.nangsuit)):0;
-  const dc={};records.forEach(r=>{if(r.chuyen)dc[r.chuyen]=(dc[r.chuyen]||0)+1});
-  const top=Object.entries(dc).sort((a,b)=>b[1]-a[1])[0];
-  document.getElementById('s-total').textContent=total||'—';
-  document.getElementById('s-avg').textContent=avg?avg+' sp':'—';
-  document.getElementById('s-max').textContent=max?max+' sp':'—';
-  document.getElementById('s-dept').textContent=top?top[0]:'—';
-  const bd=document.getElementById('dept-breakdown');
-  if(!Object.keys(dc).length){bd.innerHTML='<div class="empty">Chưa có dữ liệu</div>';return}
-  const maxC=Math.max(...Object.values(dc));
-  bd.innerHTML=Object.entries(dc).sort((a,b)=>b[1]-a[1]).map(([d,c])=>`<div class="bar-item"><div class="bar-header"><span class="bar-name">${d}</span><span class="bar-count">${c} bản ghi</span></div><div class="bar-track"><div class="bar-fill" style="width:${Math.round(c/maxC*100)}%"></div></div></div>`).join('');
-}
-
-function renderDanhSach(){
-  const c=document.getElementById('nv-container');if(!c)return;
-  if(!danhSach.length){c.innerHTML='<div class="empty">Chưa có nhân viên nào</div>';return}
-  const grouped={};
-  danhSach.forEach(nv=>{if(!grouped[nv.chuyen])grouped[nv.chuyen]=[];grouped[nv.chuyen].push(nv)});
-  c.innerHTML=Object.entries(grouped).sort((a,b)=>a[0].localeCompare(b[0])).map(([chuyen,nvs])=>`
-    <div class="card" style="margin-bottom:10px">
-      <div class="chuyen-header">${chuyen} — ${nvs.length} người</div>
-      ${nvs.map(nv=>`<div class="nv-item"><div class="nv-avatar">${getInitials(nv.ten)}</div><div class="nv-info"><div class="nv-name">${nv.ten}</div></div><button class="nv-del" onclick="xoaNhanVien('${nv.ten.replace(/'/g,"\\'")}','${nv.chuyen.replace(/'/g,"\\'")}')"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"/><path d="M19 6l-1 14H6L5 6"/><path d="M10 11v6M14 11v6"/></svg></button></div>`).join('')}
-    </div>`).join('');
-}
-
-async function addNhanVien(){
-  const ten=document.getElementById('add-ten').value.trim();
-  const chuyen=document.getElementById('add-chuyen').value;
-  if(!ten||!chuyen){showToast('Điền đủ tên và chuyền!','error');return}
-  try{
-    await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'themNV',ten,chuyen})});
-    danhSach.push({ten,chuyen});renderDanhSach();
-    document.getElementById('add-ten').value='';document.getElementById('add-chuyen').value='';
-    showToast('Đã thêm '+ten+'!');
-  }catch(e){showToast('Lỗi kết nối!','error')}
-}
-
-async function xoaNhanVien(ten,chuyen){
-  if(!confirm('Xóa '+ten+'?'))return;
-  try{
-    await fetch(SHEET_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/json'},body:JSON.stringify({action:'xoaNV',ten,chuyen})});
-    danhSach=danhSach.filter(nv=>!(nv.ten===ten&&nv.chuyen===chuyen));renderDanhSach();
-    showToast('Đã xóa '+ten);
-  }catch(e){showToast('Lỗi kết nối!','error')}
-}
-
-function checkNvPassword(){
-  const val=document.getElementById('nv-pw').value;
-  if(val===NV_PASSWORD){
-    nvUnlocked=true;
-    document.getElementById('nv-lock').style.display='none';
-    document.getElementById('nv-content').style.display='block';
-    loadDanhSach();
-  }else{
-    document.getElementById('nv-pw-err').style.display='block';
-    document.getElementById('nv-pw').value='';
-    document.getElementById('nv-pw').focus();
+  } catch (e) {
+    showToast('Lỗi kết nối!', 'error');
+    setStatus('Lỗi');
   }
-}
-function togglePwVis(){
-  const inp=document.getElementById('nv-pw'),eye=document.getElementById('pw-eye');
-  inp.type=inp.type==='password'?'text':'password';eye.textContent=inp.type==='password'?'👁':'🙈';
+
+  btn.disabled = false;
+  btn.innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:18px;height:18px"><path d="M19 21H5a2 2 0 01-2-2V5a2 2 0 012-2h11l5 5v11a2 2 0 01-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> Lưu vào Google Sheets';
 }
 
-function switchTab(id){
-  ['nhap','bao-cao','nhan-vien'].forEach(t=>{
-    document.getElementById('sec-'+t).style.display=t===id?'block':'none';
-    document.getElementById('tab-'+t+'-btn').classList.toggle('active',t===id);
+// ── Báo cáo ──
+async function loadBaoCao() {
+  setStatus('Đang tải...');
+  try {
+    const rows = await fetchData(SHEET_URL + '?t=' + Date.now());
+    // Cột: 0=KhungGio, 1=Ten, 2=Chuyen, 3=MaHang, 4=SoCongDoan, 5=TenCongDoan, 6=NangSuit, 7=Ngay
+    records = rows.length <= 1 ? [] : rows.slice(1).map(r => ({
+      ten: r[1] || '', chuyen: r[2] || '', nangsuit: parseInt(r[6]) || 0
+    }));
+    renderReport();
+    setStatus('Đã đồng bộ ✓');
+  } catch (e) { setStatus('Lỗi tải'); }
+}
+
+function renderReport() {
+  const total = records.length;
+  const avg   = total ? Math.round(records.reduce((s, r) => s + r.nangsuit, 0) / total) : 0;
+  const max   = total ? Math.max(...records.map(r => r.nangsuit)) : 0;
+  const dc = {};
+  records.forEach(r => { if (r.chuyen) dc[r.chuyen] = (dc[r.chuyen] || 0) + 1; });
+  const top = Object.entries(dc).sort((a, b) => b[1] - a[1])[0];
+
+  document.getElementById('s-total').textContent = total || '—';
+  document.getElementById('s-avg').textContent   = avg ? avg + ' sp' : '—';
+  document.getElementById('s-max').textContent   = max ? max + ' sp' : '—';
+  document.getElementById('s-dept').textContent  = top ? top[0] : '—';
+
+  const bd = document.getElementById('dept-breakdown');
+  if (!Object.keys(dc).length) { bd.innerHTML = '<div class="empty">Chưa có dữ liệu</div>'; return; }
+  const maxC = Math.max(...Object.values(dc));
+  bd.innerHTML = Object.entries(dc).sort((a, b) => b[1] - a[1]).map(([d, c]) =>
+    `<div class="bar-item">
+      <div class="bar-header"><span class="bar-name">${d}</span><span class="bar-count">${c} bản ghi</span></div>
+      <div class="bar-track"><div class="bar-fill" style="width:${Math.round(c / maxC * 100)}%"></div></div>
+    </div>`
+  ).join('');
+}
+
+// ── Tab switch ──
+function switchTab(id) {
+  ['nhap', 'bao-cao'].forEach(t => {
+    document.getElementById('sec-' + t).style.display = t === id ? 'block' : 'none';
+    document.getElementById('tab-' + t + '-btn').classList.toggle('active', t === id);
   });
-  if(id==='bao-cao')loadBaoCao();
-  if(id==='nhan-vien'&&nvUnlocked)loadDanhSach();
+  if (id === 'bao-cao') loadBaoCao();
 }
 
-document.getElementById('inp-ngay').value=new Date().toISOString().split('T')[0];
-Promise.all([loadDanhSach(),loadMaHang()]).then(()=>setStatus('Sẵn sàng ✓'));
+// ── Init ──
+document.getElementById('inp-ngay').value = new Date().toISOString().split('T')[0];
+Promise.all([loadDanhSach(), loadMaHang()]).then(() => setStatus('Sẵn sàng ✓'));
 </script>
 </body>
 </html>
