@@ -186,7 +186,7 @@ body{font-family:'Be Vietnam Pro',sans-serif;background:var(--bg);color:var(--te
 <div class="toast" id="toast"></div>
 
 <script>
-const SHEET_URL = 'https://script.google.com/macros/s/ĐÁN_URL_APPS_SCRIPT_VÀO_ĐÂY/exec';
+const SHEET_URL = 'https://script.google.com/macros/s/AKfycbxLNb1wQnhe_4qW8gdMONbnTF2TGlsznfBiXVUt9dvc7dJh_6cwLn3kqGUYwyhDomD0mw/exec';
 
 let danhSach = [], maHangData = {}, maHangList = [], records = [], toastTimer, selectedCD = null;
 
@@ -260,14 +260,21 @@ function onChuyenChange() {
 
 // ── Autocomplete tên ──
 function onTenInput() {
-  const val = document.getElementById('inp-ten').value.trim();
+  const val    = document.getElementById('inp-ten').value.trim();
   const chuyen = document.getElementById('inp-chuyen').value;
-  const list = document.getElementById('suggest-ten');
-  if (!val || !chuyen) { list.style.display = 'none'; return; }
-  const normVal = normalize(val);
-  const filtered = danhSach.filter(nv => nv.chuyen === chuyen && normalize(nv.ten).includes(normVal)).slice(0, 8);
+  const list   = document.getElementById('suggest-ten');
+  if (!chuyen) { list.style.display = 'none'; return; }
+
+  // Nếu chưa gõ gì → hiện toàn bộ danh sách của chuyền đó
+  const normVal  = normalize(val);
+  const filtered = danhSach
+    .filter(nv => nv.chuyen === chuyen && (!val || normalize(nv.ten).includes(normVal)))
+    .slice(0, 12);
+
   if (!filtered.length) { list.style.display = 'none'; return; }
+
   list.innerHTML = filtered.map(nv => {
+    if (!val) return `<div class="suggest-item" onmousedown="selectTen('${nv.ten.replace(/'/g, "\\'")}')">${nv.ten}</div>`;
     const idx = normalize(nv.ten).indexOf(normVal);
     let hl = nv.ten;
     if (idx >= 0) hl = nv.ten.substring(0, idx) + '<span class="suggest-hl">' + nv.ten.substring(idx, idx + val.length) + '</span>' + nv.ten.substring(idx + val.length);
